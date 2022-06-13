@@ -10,8 +10,25 @@ export default function App() {
   const [nextArrival,setNextArrival] = useState("");
   const [countdown,setCountdown] = useState("");
   const [nextCountdown,setNextCountdown] = useState("");
+  const timeCountdown = millisToMinutesAndSeconds(countdown);
+  const timeNextCountdown = millisToMinutesAndSeconds(nextCountdown);
+
+  const timeArrival = new Date(arrival);
+  const timeNextArrival = new Date(nextArrival);
+ 
 
   const BUSSTOP_URL = "https://arrivelah2.busrouter.sg/?id=22249"
+
+
+  function millisToMinutesAndSeconds(millis) {
+    var minutes = Math.floor(millis / 60000);
+    var seconds = ((millis % 60000) / 1000).toFixed(0);
+    return minutes + "min " + (seconds < 10 ? '0' : '') + seconds +'sec';
+  }
+  
+
+
+
 
   function loadBusStopData() {
     setLoading(true);
@@ -52,12 +69,12 @@ export default function App() {
     <View style={styles.container}>
       <Text style={styles.bigTitle}>BUS 192</Text>
       <Text style={styles.title}>NEXT Bus arrival time: </Text>
-      <Text style={styles.arrivalTime}>{loading ? <ActivityIndicator color={'blue'} size={"large"}/> : arrival} </Text>
-      <Text style={styles.arrivalTime}>{loading ? <ActivityIndicator color={'blue'} size={"large"}/> : countdown} </Text>
+      <Text style={styles.arrivalTime}>{loading ? <ActivityIndicator color={'blue'} size={"large"}/> : timeArrival.toTimeString()} </Text>
+      <Text style={styles.arrivalTime}>{loading ? <ActivityIndicator color={'blue'} size={"large"}/> : `coming in: ${timeCountdown}`} </Text>
 
       <Text style={styles.title}>NEXT NEXT Bus arrival time: </Text>
-      <Text style={styles.arrivalTime}>{loading ? <ActivityIndicator color={'blue'} size={"large"}/> : nextArrival} </Text>
-      <Text style={styles.arrivalTime}>{loading ? <ActivityIndicator color={'blue'} size={"large"}/> : nextCountdown} </Text>
+      <Text style={styles.arrivalTime}>{loading ? <ActivityIndicator color={'blue'} size={"large"}/> : timeNextArrival.toTimeString()} </Text>
+      <Text style={styles.arrivalTime}>{loading ? <ActivityIndicator color={'blue'} size={"large"}/> : `coming in: ${timeNextCountdown}`} </Text>
 
       <TouchableOpacity  style={styles.button} onPress={() => loadBusStopData()}>
         <Text style={styles.buttonText}>Refresh</Text>
