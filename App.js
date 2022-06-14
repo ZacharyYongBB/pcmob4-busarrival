@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableOpacity,  ActivityIndicator, TextInput,SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity,  ActivityIndicator, TextInput,SafeAreaView, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import React, { useState , useEffect } from 'react';
 
 
@@ -68,6 +68,7 @@ export default function App() {
 
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
     <SafeAreaView style={styles.container}>
       <Text style={styles.bigTitle}>Bus Number</Text>
       <TextInput
@@ -109,6 +110,7 @@ export default function App() {
 
       <StatusBar style="auto" />
     </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 }
 
