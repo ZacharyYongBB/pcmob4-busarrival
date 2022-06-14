@@ -86,6 +86,7 @@ export default function App() {
       keyboardType="numeric"
       />
 
+      
       <TouchableOpacity  style={styles.button} onPress={() => loadBusStopData()}>
         <Text style={styles.buttonText}>Search</Text>
       </TouchableOpacity>
